@@ -1,0 +1,12 @@
+/* Estilos compartidos - Logística Fluvial PY */
+:root {
+  --navy:  #0d1f2d;
+  --gold:  #c9922a;
+  --gold2: #e8a83a;
+  --muted: #8fa3b1;
+  --text:  #e8e2d8;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Lora', Georgia, serif; background: var(--navy); color: var(--text); }
