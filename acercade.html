@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acerca de — Logística Fluvial PY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0d1f2d;
+      --navy2: #162840;
+      --navy3: #1e3a52;
+      --gold:  #c9922a;
+      --gold2: #e8a83a;
+      --text:  #e8e2d8;
+      --muted: #8fa3b1;
+      --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lora', Georgia, serif; background: var(--navy); color: var(--text); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,31,45,0.96);
+      border-bottom: 1px solid rgba(201,146,42,0.25);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between; height: 62px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-text {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1.1rem; letter-spacing: 0.04em; color: var(--gold2);
+      text-transform: uppercase; line-height: 1.1;
+    }
+    .nav-logo-text span { display: block; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--muted); }
+    .nav-links { display: flex; list-style: none; gap: 0.25rem; }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; padding: 6px 12px; border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold2); background: rgba(201,146,42,0.1); }
+    .nav-contact-btn { color: var(--navy) !important; background: var(--gold) !important; }
+    .nav-contact-btn:hover { background: var(--gold2) !important; }
+
+    /* HERO */
+    .page-hero {
+      min-height: 320px; display: flex; align-items: flex-end;
+      padding: 100px 2rem 3.5rem;
+      background: linear-gradient(160deg, #0d1f2d 0%, #162840 60%, #0d2035 100%);
+      border-bottom: 1px solid rgba(201,146,42,0.15);
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,146,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,146,42,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute; right: -100px; top: 50%; transform: translateY(-50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,146,42,0.07) 0%, transparent 70%);
+    }
+    .page-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .breadcrumb {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--gold2); }
+    .page-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em;
+      color: var(--white); line-height: 1;
+    }
+    .page-title .accent { color: var(--gold2); }
+    .page-subtitle { font-size: 1rem; color: var(--muted); margin-top: 0.75rem; font-style: italic; }
+
+    /* HISTORIA */
+    .section-historia { padding: 80px 2rem; background: var(--navy); }
+    .historia-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    @media (max-width: 720px) { .historia-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .section-tag {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem;
+      font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-tag::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+    .section-tag-center { justify-content: center; }
+    .section-tag-center::before, .section-tag-center::after { content: ''; width: 28px; height: 1px; background: var(--gold); }
+
+    .section-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+      color: var(--white); line-height: 1.05; margin-bottom: 1.25rem;
+    }
+    .section-body { font-size: 0.97rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; }
+
+    .historia-card {
+      background: var(--navy2); border: 1px solid rgba(201,146,42,0.2);
+      border-radius: 8px; padding: 2rem; position: relative;
+    }
+    .historia-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      border-radius: 8px 8px 0 0;
+    }
+    .historia-year {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 5rem;
+      font-weight: 800; line-height: 1; color: rgba(201,146,42,0.12);
+      letter-spacing: -0.02em; margin-bottom: -1rem;
+    }
+    .historia-fact {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text);
+      border-top: 1px solid rgba(201,146,42,0.15); padding-top: 1rem; margin-top: 1rem;
+    }
+    .historia-fact span { color: var(--gold2); }
+    .historia-badge {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 1.25rem;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+      background: rgba(201,146,42,0.1); border: 1px solid rgba(201,146,42,0.25);
+      padding: 5px 14px; border-radius: 2px;
+    }
+
+    /* MISIÓN & VISIÓN */
+    .section-mv {
+      padding: 80px 2rem; background: var(--navy2);
+      border-top: 1px solid rgba(201,146,42,0.1); border-bottom: 1px solid rgba(201,146,42,0.1);
+    }
+    .mv-header { text-align: center; margin-bottom: 2.5rem; }
+    .mv-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+    @media (max-width: 680px) { .mv-grid { grid-template-columns: 1fr; } }
+    .mv-card {
+      background: var(--navy); border: 1px solid rgba(201,146,42,0.15);
+      border-radius: 8px; padding: 2.5rem; position: relative; overflow: hidden;
+    }
+    .mv-card-stripe {
+      position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, var(--gold), var(--gold2));
+    }
+    .mv-icon {
+      width: 48px; height: 48px; background: rgba(201,146,42,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;
+    }
+    .mv-icon svg { width: 24px; height: 24px; stroke: var(--gold2); fill: none; stroke-width: 1.7; }
+    .mv-label {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem;
+    }
+    .mv-title {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
+      margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(201,146,42,0.15);
+    }
+    .mv-text { font-size: 0.93rem; color: var(--muted); line-height: 1.85; }
+    .mv-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.25rem; }
+    .mv-pill {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold);
+      background: rgba(201,146,42,0.08); border: 1px solid rgba(201,146,42,0.2);
+      padding: 3px 10px; border-radius: 2px;
+    }
+
+    /* VALORES */
+    .section-valores { padding: 80px 2rem; background: var(--navy); }
+    .valores-header { text-align: center; margin-bottom: 3rem; }
+    .valores-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+    }
+    @media (max-width: 720px) { .valores-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .valores-grid { grid-template-columns: 1fr; } }
+    .valor-card {
+      background: var(--navy2); border: 1px solid rgba(201,146,42,0.12);
+      border-radius: 6px; padding: 1.75rem;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .valor-card:hover { border-color: rgba(201,146,42,0.35); transform: translateY(-3px); }
+    .valor-num {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 800;
+      color: rgba(201,146,42,0.15); line-height: 1; margin-bottom: -0.5rem;
+    }
+    .valor-name {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; color: var(--white); margin-bottom: 0.5rem;
+    }
+    .valor-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* EQUIPO */
+    .section-equipo {
+      padding: 80px 2rem; background: var(--navy2);
+      border-top: 1px solid rgba(201,146,42,0.1);
+    }
+    .equipo-header { text-align: center; margin-bottom: 3rem; }
+    .equipo-grid {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    }
+    @media (max-width: 580px) { .equipo-grid { grid-template-columns: 1fr; } }
+    .miembro-card {
+      background: var(--navy); border: 1px solid rgba(201,146,42,0.15);
+      border-radius: 8px; padding: 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .miembro-card:hover { border-color: rgba(201,146,42,0.4); transform: translateY(-2px); }
+    .miembro-avatar {
+      width: 64px; height: 64px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--navy3), var(--navy2));
+      border: 2px solid rgba(201,146,42,0.3); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--gold2);
+    }
+    .miembro-nombre {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.25rem;
+    }
+    .miembro-rol { font-size: 0.82rem; color: var(--gold); font-style: italic; }
+
+    /* FOOTER */
+    footer { background: #070f16; border-top: 1px solid rgba(201,146,42,0.15); padding: 3rem 2rem 1.5rem; }
+    .footer-top {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem;
+    }
+    @media (max-width: 700px) { .footer-top { grid-template-columns: 1fr; gap: 2rem; } }
+    .footer-brand-name {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.75rem;
+    }
+    .footer-brand-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; max-width: 280px; }
+    .footer-col-title {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-links a { font-size: 0.88rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold2); }
+    .footer-divider { max-width: 1100px; margin: 0 auto 1.5rem; height: 1px; background: rgba(201,146,42,0.1); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(143,163,177,0.6); font-family: 'Barlow Condensed', sans-serif; }
+    .footer-badge {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+      background: rgba(201,146,42,0.1); border: 1px solid rgba(201,146,42,0.2);
+      padding: 4px 12px; border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="15" stroke="#c9922a" stroke-width="1.2" fill="none"/>
+        <path d="M16 7v18M10 25c0 0 2-4 6-4s6 4 6 4" stroke="#c9922a" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M11 12h10" stroke="#e8a83a" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="16" cy="8" r="1.5" fill="#e8a83a"/>
+      </svg>
+      <div class="nav-logo-text">Logística Fluvial<span>Paraguay · 24/7</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="noticias.html">Noticias</a></li>
+      <li><a href="acercade.html" class="active">Acerca de</a></li>
+      <li><a href="contacto.html" class="nav-contact-btn">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="page-hero-inner">
+    <p class="breadcrumb"><a href="index.html">Inicio</a> / Acerca de</p>
+    <h1 class="page-title">Acerca de <span class="accent">Nosotros</span></h1>
+    <p class="page-subtitle">Empresa paraguaya comprometida con la logística fluvial y la distribución frutihortícola.</p>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section class="section-historia">
+  <div class="historia-grid">
+    <div>
+      <p class="section-tag">Nuestra historia</p>
+      <h2 class="section-heading">Quiénes somos</h2>
+      <p class="section-body">Somos una empresa paraguaya especializada en el abastecimiento fluvial y la distribución de productos frutihortícolas, perecederos y no perecederos a lo largo de las principales vías fluviales del país.</p>
+      <p class="section-body">Nacimos de la necesidad de brindar una solución logística confiable, ágil y personalizada en un sector donde la puntualidad y la calidad del producto son factores determinantes para nuestros clientes.</p>
+      <p class="section-body">Hoy operamos con una flota adaptada a las condiciones del río paraguayo, garantizando cobertura nacional y una capacidad de respuesta inmediata que nos diferencia del mercado.</p>
+    </div>
+    <div>
+      <div class="historia-card">
+        <div class="historia-year">2025</div>
+        <div class="historia-fact">Cobertura <span>nacional</span> en vías fluviales</div>
+        <div class="historia-fact">Distribución de productos <span>perecederos</span> y no perecederos</div>
+        <div class="historia-fact">Servicio <span>24/7</span> con respuesta inmediata</div>
+        <div class="historia-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Empresa confiable del Paraguay
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISIÓN & VISIÓN -->
+<section class="section-mv">
+  <div class="mv-header">
+    <p class="section-tag section-tag-center">Identidad corporativa</p>
+    <h2 class="section-heading" style="font-size:2rem;text-align:center;">Misión y Visión</h2>
+  </div>
+  <div class="mv-grid">
+    <div class="mv-card">
+      <div class="mv-card-stripe"></div>
+      <div class="mv-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <p class="mv-label">Misión</p>
+      <h3 class="mv-title">Lo que hacemos hoy</h3>
+      <p class="mv-text">Brindar soluciones integrales de abastecimiento fluvial y distribución frutihortícola, garantizando calidad, puntualidad y capacidad de respuesta inmediata, mediante una logística eficiente y un servicio personalizado que asegure la continuidad operativa de nuestros clientes.</p>
+      <div class="mv-pills">
+        <span class="mv-pill">Calidad</span>
+        <span class="mv-pill">Puntualidad</span>
+        <span class="mv-pill">Logística eficiente</span>
+        <span class="mv-pill">Servicio personalizado</span>
+      </div>
+    </div>
+    <div class="mv-card">
+      <div class="mv-card-stripe"></div>
+      <div class="mv-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <p class="mv-label">Visión</p>
+      <h3 class="mv-title">A dónde vamos</h3>
+      <p class="mv-text">Ser la empresa líder en Paraguay en abastecimiento fluvial y distribución de productos perecederos y no perecederos, reconocida por nuestra confiabilidad, cobertura logística, innovación operativa y compromiso permanente con el servicio 24/7.</p>
+      <div class="mv-pills">
+        <span class="mv-pill">Liderazgo</span>
+        <span class="mv-pill">Confiabilidad</span>
+        <span class="mv-pill">Innovación</span>
+        <span class="mv-pill">Servicio 24/7</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALORES -->
+<section class="section-valores">
+  <div class="valores-header">
+    <p class="section-tag section-tag-center">Lo que nos guía</p>
+    <h2 class="section-heading" style="font-size:2rem;text-align:center;">Nuestros valores</h2>
+  </div>
+  <div class="valores-grid">
+    <div class="valor-card">
+      <div class="valor-num">01</div>
+      <div class="valor-name">Confiabilidad</div>
+      <p class="valor-desc">Cumplimos con cada compromiso asumido, construyendo relaciones duraderas basadas en la palabra y el resultado.</p>
+    </div>
+    <div class="valor-card">
+      <div class="valor-num">02</div>
+      <div class="valor-name">Puntualidad</div>
+      <p class="valor-desc">Entendemos que en la cadena de abastecimiento cada hora cuenta. Nuestra operativa está diseñada para no fallar.</p>
+    </div>
+    <div class="valor-card">
+      <div class="valor-num">03</div>
+      <div class="valor-name">Calidad</div>
+      <p class="valor-desc">Garantizamos la integridad de los productos desde el origen hasta la entrega, con controles en cada etapa.</p>
+    </div>
+    <div class="valor-card">
+      <div class="valor-num">04</div>
+      <div class="valor-name">Innovación</div>
+      <p class="valor-desc">Buscamos constantemente mejorar nuestros procesos logísticos para responder mejor a las necesidades del mercado.</p>
+    </div>
+    <div class="valor-card">
+      <div class="valor-num">05</div>
+      <div class="valor-name">Cobertura</div>
+      <p class="valor-desc">Operamos en las principales rutas fluviales del Paraguay garantizando alcance nacional con flota propia.</p>
+    </div>
+    <div class="valor-card">
+      <div class="valor-num">06</div>
+      <div class="valor-name">Disponibilidad</div>
+      <p class="valor-desc">Atención y operación sin pausas: 24 horas al día, 7 días a la semana, los 365 días del año.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section class="section-equipo">
+  <div class="equipo-header">
+    <p class="section-tag section-tag-center">Las personas detrás</p>
+    <h2 class="section-heading" style="font-size:2rem;text-align:center;">Nuestro equipo</h2>
+  </div>
+  <div class="equipo-grid">
+    <div class="miembro-card">
+      <div class="miembro-avatar">AC</div>
+      <div>
+        <div class="miembro-nombre">Anibal Cardozo</div>
+        <div class="miembro-rol">Desarrollo & Arquitectura Web</div>
+      </div>
+    </div>
+    <div class="miembro-card">
+      <div class="miembro-avatar">OD</div>
+      <div>
+        <div class="miembro-nombre">Oliver Demestri</div>
+        <div class="miembro-rol">Diseño & Experiencia de Usuario</div>
+      </div>
+    </div>
+    <div class="miembro-card">
+      <div class="miembro-avatar">BS</div>
+      <div>
+        <div class="miembro-nombre">Bruno Sanchez</div>
+        <div class="miembro-rol">Contenido & Documentación</div>
+      </div>
+    </div>
+    <div class="miembro-card">
+      <div class="miembro-avatar">HC</div>
+      <div>
+        <div class="miembro-nombre">Hugo Colman</div>
+        <div class="miembro-rol">Gestión de Proyecto & Logística</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">Logística Fluvial PY</div>
+      <p class="footer-brand-desc">Empresa paraguaya dedicada al abastecimiento fluvial y la distribución frutihortícola con cobertura nacional y disponibilidad 24/7.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Navegación</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="noticias.html">Noticias</a></li>
+        <li><a href="acercade.html">Acerca de</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contacto</p>
+      <ul class="footer-links">
+        <li><a href="#">Asunción, Paraguay</a></li>
+        <li><a href="#">+595 21 000 0000</a></li>
+        <li><a href="#">info@logisticafluvialpy.com</a></li>
+        <li><a href="#">Atención 24 / 7</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Logística Fluvial PY — Todos los derechos reservados</span>
+    <span class="footer-badge">Servicio 24/7</span>
+  </div>
+</footer>
+
+</body>
+</html>
