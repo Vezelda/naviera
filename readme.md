@@ -15,7 +15,6 @@ Proyecto de sitio web corporativo para empresa de abastecimiento fluvial y distr
 naviera/
 ├── index.html        # Página principal con hero y vista previa de secciones
 ├── servicios.html    # Detalle de servicios logísticos
-├── noticias.html     # Artículos y novedades
 ├── acercade.html     # Información institucional
 ├── contacto.html     # Formulario y datos de contacto
 ├── assets/
